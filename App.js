@@ -1,10 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import LoginPage from "./components/LoginPage";
+import MainPage from "./components/MainPage";
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [curentUser, setCurentUser] = useState("test");
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      {!isLoggedIn ? (
+        <LoginPage
+          setIsLoggedIn={setIsLoggedIn}
+          setCurentUser={setCurentUser}
+        />
+      ) : (
+        <MainPage curentUser={curentUser} />
+      )}
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +26,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#313c50",
   },
 });
